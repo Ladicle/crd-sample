@@ -2,12 +2,14 @@
 
 set -eu
 
+wd=$(cd $(dirname $0); pwd)
+
 clear
 echo "Start DEMO :)"; read ans
 
 # open & describe CRD
 tmux split-window -v -p 90
-tmux send-keys -t 1 'e /Users/aigarash/Developments/src/github.com/Ladicle/crd-sample/sample-crd.yaml' C-m
+tmux send-keys -t 1 'e '$wd'/sample-crd.yaml' C-m
 tmux select-pane -t 0
 echo "Now: Display CRD "
 echo "Next: Create CRD"; read ans
@@ -16,15 +18,15 @@ tmux send-keys -t 1 C-x C-c
 tmux select-pane -t 1
 tmux split-window -h -p 50
 tmux send-keys -t 1 'clear' C-m 'kubectl get crd -w' C-m
-tmux send-keys -t 2 'kubectl create -f /Users/aigarash/Developments/src/github.com/Ladicle/crd-sample/sample-crd.yaml' C-m
+tmux send-keys -t 2 'kubectl create -f '$wd'/sample-crd.yaml' C-m
 
 # open & describe CR
 tmux select-pane -t 0
 echo "Now: Create CRD"
 echo "Next: Compare CRD and CR"; read ans
 
-tmux send-keys -t 1 C-c 'e /Users/aigarash/Developments/src/github.com/Ladicle/crd-sample/sample-crd.yaml' C-m
-tmux send-keys -t 2 'e /Users/aigarash/Developments/src/github.com/Ladicle/crd-sample/sample-cr.yaml' C-m
+tmux send-keys -t 1 C-c 'e '$wd'/sample-crd.yaml' C-m
+tmux send-keys -t 2 'e '$wd'/sample-cr.yaml' C-m
 
 # create CR
 tmux select-pane -t 0
@@ -38,7 +40,7 @@ tmux send-keys -t 1 'clear' C-m
 tmux send-keys -t 2 'clear' C-m
 
 tmux send-keys -t 1 'kubectl get mp -w' C-m
-tmux send-keys -t 2 'kubectl create -f /Users/aigarash/Developments/src/github.com/Ladicle/crd-sample/sample-cr.yaml' C-m
+tmux send-keys -t 2 'kubectl create -f '$wd'/sample-cr.yaml' C-m
 
 # edit CR
 tmux select-pane -t 0
@@ -61,7 +63,7 @@ echo "Now: Display updated CR"
 echo "Next: Create CR contains unexpected field"; read ans
 
 tmux send-keys -t 1 'clear' C-m
-tmux send-keys -t 1 'e /Users/aigarash/Developments/src/github.com/Ladicle/crd-sample/sample-cr-with-unexpected-field.yaml' C-m
+tmux send-keys -t 1 'e '$wd'/sample-cr-with-unexpected-field.yaml' C-m
 
 # create
 tmux select-pane -t 0
@@ -70,7 +72,7 @@ echo "Next: nil"; read ans
 
 tmux send-keys -t 1 C-x C-c
 tmux send-keys -t 1 'clear' C-m
-tmux send-keys -t 1 'kubectl create -f /Users/aigarash/Developments/src/github.com/Ladicle/crd-sample/sample-cr-with-unexpected-field.yaml' C-m
+tmux send-keys -t 1 'kubectl create -f '$wd'/sample-cr-with-unexpected-field.yaml' C-m
 
 # end
 read ans
