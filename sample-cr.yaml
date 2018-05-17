@@ -1,0 +1,17 @@
+apiVersion: kube.tokyo/v1
+kind: Meetup
+metadata:
+  name: meetup11
+  namespace: default
+spec:
+  eventName: "Kubernetes Meetup Tokyo #11"
+  theme: recap
+  speakerNames:
+    - lanMLewis
+    - amsy810
+    - ladicle
+    - nasa9085
+    - jyoshise
+    - rafiror
+    - dtan4
+  capacity: 200

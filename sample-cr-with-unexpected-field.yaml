@@ -1,0 +1,7 @@
+apiVersion: kube.tokyo/v1
+kind: Meetup
+metadata:
+  name: invalid-meetup
+  namespace: default
+spec:
+  unexpectedField: dangerous value
